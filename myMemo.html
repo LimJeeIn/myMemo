@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <title>나의 메모</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="head">
+      <section class="colorPicker">
+        <div>🌈</div>
+        <label class="a11y-hidden" for="userPicker">색상 바꾸기</label>
+        <input type="color" class="userPicker" data-id="colorPic" />
+      </section>
+      <h1>mMm</h1>
+      <span>✨ myMemo ✨</span>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
+        <br />
+        consequatur, porro cum ut nostrum provident animi molestias. Non illo
+        itaque nam! <br />Delectus explicabo neque sapiente voluptatem optio!
+        Enim, fugiat a.
+      </p>
+    </header>
+    <main>
+      <div class="wrapper">
+        <section class="content">
+          <form>
+            <label class="a11y-hidden" for="title">메모 제목</label>
+            <input
+              type="text"
+              name=""
+              id="title"
+              placeholder="제목을 입력하세요"
+              required
+            />
+            <label class="a11y-hidden" for="subText">메모 제목 설명</label>
+            <input
+              type="text"
+              name=""
+              id="subText"
+              placeholder="부제목을 입력하세요"
+              required
+            />
+            <label class="a11y-hidden" for="content">메모 내용</label>
+            <textarea
+              name=""
+              id="content"
+              cols="30"
+              rows="10"
+              placeholder="내용을 입력하세요"
+              required
+            ></textarea>
+            <button onclick="saveNote()" class="memoAdd">button</button>
+          </form>
+        </section>
+        <section id="display"></section>
+      </div>
+    </main>
+    <script src="custom.js"></script>
+  </body>
+</html>
