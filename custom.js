@@ -1,10 +1,10 @@
-let allMemo = JSON.parse(localStorage.getItem('allMemo'));
-allMemo = allMemo ?? [];
+let myMemo = JSON.parse(localStorage.getItem('myMemo'));
+myMemo = myMemo ?? [];
 render();
 
 // 저장 버튼 클릭했을때
 // 새로운 메모 추가, -> 로컬스토리지에 저장 -> render()호출
-function saveNote() {
+function saveMemo() {
   const title = document.getElementById('title').value;
   const subText = document.getElementById('subText').value;
   const content = document.getElementById('content').value;
@@ -13,22 +13,21 @@ function saveNote() {
   if (title.length < 1 || subText.length < 1 || content.length < 1) {
     alert('다시 확인해주세요');
   } else {
-    allMemo.push({ title, subText, content, len: allMemo.length });
+    myMemo.push({ title, subText, content, len: myMemo.length });
 
     // 배열을 문자열로 변환한 뒤 저장
-    localStorage.setItem('allMemo', JSON.stringify(allMemo));
+    localStorage.setItem('myMemo', JSON.stringify(myMemo));
     render();
   }
 }
 
 // 메모를 화면에 렌더링 하는 과정
-
 function render() {
   const display = document.getElementById('display');
   display.innerHTML = '';
 
-  for (let i = allMemo.length - 1; i >= 0; i--) {
-    const item = allMemo[i];
+  for (let i = myMemo.length - 1; i >= 0; i--) {
+    const item = myMemo[i];
 
     const saveArticle = document.createElement('article');
     const saveTitle = document.createElement('h2');
@@ -40,26 +39,26 @@ function render() {
     saveSubText.textContent = item.subText;
     saveContent.textContent = item.content;
 
-    const deleteMemoBtn = document.createElement('button');
-    deleteMemoBtn.textContent = '✅';
-    deleteMemoBtn.setAttribute('id', item.len);
-    deleteMemoBtn.setAttribute('onclick', 'remove(event)');
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = '✅';
+    removeBtn.setAttribute('id', item.len);
+    removeBtn.setAttribute('onclick', 'remove(event)');
 
-    const task_edit_el = document.createElement('button');
-    task_edit_el.classList.add('edit');
-    task_edit_el.innerHTML = '✏️';
-    task_edit_el.setAttribute('id', item.len);
+    const editBtn = document.createElement('button');
+    editBtn.classList.add('edit');
+    editBtn.innerHTML = '✏️';
+    editBtn.setAttribute('id', item.len);
 
     display.appendChild(saveArticle);
     saveArticle.appendChild(saveTitle);
     saveArticle.appendChild(saveSubText);
     saveArticle.appendChild(saveContent);
-    saveArticle.appendChild(deleteMemoBtn);
-    saveArticle.appendChild(task_edit_el);
+    saveArticle.appendChild(removeBtn);
+    saveArticle.appendChild(editBtn);
 
-    task_edit_el.addEventListener('click', () => {
-      const idx = allMemo.find((item) => item.len == event.srcElement.id);
-      if (task_edit_el.innerText.toLowerCase() == '✏️') {
+    editBtn.addEventListener('click', () => {
+      const idx = myMemo.find((item) => item.len == event.srcElement.id);
+      if (editBtn.innerText.toLowerCase() == '✏️') {
         const editTitle = document.createElement('input');
         const editSubTitle = document.createElement('input');
         const editTextArea = document.createElement('textarea');
@@ -76,9 +75,9 @@ function render() {
         saveSubText.replaceWith(editSubTitle);
         saveContent.replaceWith(editTextArea);
 
-        task_edit_el.innerText = '💾';
+        editBtn.innerText = '💾';
 
-        // Save 이벤트 핸들러
+        //
         const saveHandler = () => {
           const editedTitleContent = document.getElementById(
             `input1-${item.len}`
@@ -101,13 +100,13 @@ function render() {
           saveTitle.innerText = editedTitleContent;
           saveSubText.innerText = editedSubTitleContent;
           saveContent.innerText = editedContent;
-          task_edit_el.innerText = '✏️';
+          editBtn.innerText = '✏️';
 
           // Save 이벤트 핸들러 삭제
-          task_edit_el.removeEventListener('click', saveHandler);
+          editBtn.removeEventListener('click', saveHandler);
         };
 
-        task_edit_el.addEventListener('click', saveHandler);
+        editBtn.addEventListener('click', saveHandler);
       }
     });
   }
@@ -116,9 +115,9 @@ function render() {
 // 메모 삭제
 function remove(e) {
   const target = e.target;
-  const idx = allMemo.findIndex((item) => item.len == target.id);
-  allMemo.splice(idx, 1);
-  localStorage.setItem('allMemo', JSON.stringify(allMemo)); // 로컬 스토리지에서도 삭제
+  const idx = myMemo.findIndex((item) => item.len == target.id);
+  myMemo.splice(idx, 1);
+  localStorage.setItem('myMemo', JSON.stringify(myMemo)); // 로컬 스토리지에서도 삭제
   render();
 }
 
@@ -126,7 +125,26 @@ function remove(e) {
 const link = document.querySelector('.userPicker');
 const root = document.querySelector(':root');
 
+// 페이지 로드시 로컬 스토리지에서 색상값을 가져옴
+Object.keys(localStorage).forEach((key) => {
+  root.style.setProperty(key, localStorage.getItem(key));
+});
+
 link.addEventListener('input', () => {
   const name = `--point-${link.dataset.id}`;
   root.style.setProperty(name, link.value);
+  // 사용자가 선택한 색상값을 로컬 스토리지에 저장함
+  localStorage.setItem(name, link.value);
+});
+
+// toggle
+var container = document.querySelector('#container');
+
+container.addEventListener('mouseenter', function () {
+  this.classList.remove('showTodoList');
+  this.classList.add('hideTodoList');
+});
+container.addEventListener('mouseleave', function () {
+  this.classList.add('showTodoList');
+  this.classList.remove('hideTodoList');
 });
