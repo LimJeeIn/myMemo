@@ -10,8 +10,15 @@
       href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>my memo</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div class="l_wrapper">
@@ -32,29 +39,32 @@
         </p>
       </header>
       <main>
+        <h2 class="a11y-hidden">my memo</h2>
         <div class="wrapper">
-          <section class="content">
+          <section id="content">
             <form>
-              <label class="a11y-hidden" for="title">메모 제목</label>
+              <label class="a11y-hidden" for="memoTitle">메모 제목</label>
               <input
                 type="text"
                 name=""
-                id="title"
+                id="memoTitle"
                 placeholder="제목을 입력하세요"
                 required
               />
-              <label class="a11y-hidden" for="subText">메모 제목 설명</label>
+              <label class="a11y-hidden" for="memoSubTitle"
+                >메모 제목 설명</label
+              >
               <input
                 type="text"
                 name=""
-                id="subText"
+                id="memoSubTitle"
                 placeholder="부제목을 입력하세요"
                 required
               />
-              <label class="a11y-hidden" for="content">메모 내용</label>
+              <label class="a11y-hidden" for="memoContent">메모 내용</label>
               <textarea
                 name=""
-                id="content"
+                id="memoContent"
                 cols="30"
                 rows="10"
                 placeholder="내용을 입력하세요"
@@ -66,10 +76,29 @@
           <section id="display"></section>
         </div>
       </main>
-      <div id="container" class="showTodoList">
-        <h2></h2>
-      </div>
+      <section id="container" class="showTodoList">
+        <h2 class="a11y-hidden">my profile</h2>
+        <article class="profileCard">
+          <figure class="profileCover">
+            <img src="img/baby.png" alt="my Profile Image" />
+          </figure>
+          <header class="profileContents">
+            <h2>Hello! <br />Lim JeeIn</h2>
+            <h3>Junior Front End Developer</h3>
+          </header>
+          <ul class="skill">
+            <li><i class="fa-brands fa-html5"></i>HTML</li>
+            <li><i class="fa-brands fa-css3-alt"></i>CSS</li>
+            <li><i class="fa-brands fa-sass"></i>SCSS</li>
+            <li><i class="fa-brands fa-js"></i>JavaScript</li>
+            <li><i class="fa-brands fa-react"></i>React</li>
+            <li><i class="fa-brands fa-vuejs"></i>Vue</li>
+            <li><i class="fa-brands fa-github"></i>Git</li>
+            <li><i class="fa-brands fa-node"></i>node.js</li>
+          </ul>
+        </article>
+      </section>
     </div>
-    <script src="custom.js"></script>
+    <script src="js/custom.js"></script>
   </body>
 </html>

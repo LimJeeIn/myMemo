@@ -5,9 +5,9 @@ render();
 // 저장 버튼 클릭했을때
 // 새로운 메모 추가, -> 로컬스토리지에 저장 -> render()호출
 function saveMemo() {
-  const title = document.getElementById('title').value;
-  const subText = document.getElementById('subText').value;
-  const content = document.getElementById('content').value;
+  const title = document.getElementById('memoTitle').value;
+  const subText = document.getElementById('memoSubTitle').value;
+  const content = document.getElementById('memoContent').value;
 
   // 유효성 검사
   if (title.length < 1 || subText.length < 1 || content.length < 1) {
@@ -15,7 +15,6 @@ function saveMemo() {
   } else {
     myMemo.push({ title, subText, content, len: myMemo.length });
 
-    // 배열을 문자열로 변환한 뒤 저장
     localStorage.setItem('myMemo', JSON.stringify(myMemo));
     render();
   }
@@ -23,6 +22,7 @@ function saveMemo() {
 
 // 메모를 화면에 렌더링 하는 과정
 function render() {
+  const form = document.getElementById('content');
   const display = document.getElementById('display');
   display.innerHTML = '';
 
@@ -56,6 +56,7 @@ function render() {
     saveArticle.appendChild(removeBtn);
     saveArticle.appendChild(editBtn);
 
+    // memo edit
     editBtn.addEventListener('click', () => {
       const idx = myMemo.find((item) => item.len == event.srcElement.id);
       if (editBtn.innerText.toLowerCase() == '✏️') {
@@ -109,6 +110,15 @@ function render() {
         editBtn.addEventListener('click', saveHandler);
       }
     });
+  }
+
+  // myMemo.length에 따른 #content 반응
+  if (myMemo.length == 0) {
+    display.classList.remove('displayResize');
+    form.classList.remove('contentResize');
+  } else {
+    form.classList.add('contentResize');
+    display.classList.add('displayResize');
   }
 }
 

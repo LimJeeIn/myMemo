@@ -1,3 +1,4 @@
+/* 공통 */
 :root {
   --point-colorPic: rgba(143, 169, 229);
 }
@@ -20,6 +21,7 @@
 .l_wrapper {
   position: relative;
 }
+/* header */
 .head {
   text-align: center;
   padding-top: 60px;
@@ -62,12 +64,25 @@ main {
   margin: auto;
   gap: 50px;
 }
-
-.content {
+/* content */
+/* 컨텐츠 리사이즈 */
+#content {
+  width: 100%;
+}
+#display {
+  display: none;
+}
+#content.contentResize {
   flex-basis: 456px;
   flex-shrink: 0;
 }
-.content input,
+#display.displayResize {
+  min-width: 900px;
+  display: flex;
+  overflow-x: scroll;
+  padding-bottom: 10px;
+}
+#content input,
 #display article input {
   display: block;
   padding: 20px;
@@ -75,7 +90,7 @@ main {
   margin-bottom: 10px;
   border: 1px solid #eee;
 }
-.content textarea {
+#content textarea {
   display: block;
   padding: 20px;
   width: 100%;
@@ -83,12 +98,11 @@ main {
   margin-bottom: 10px;
   border: 1px solid #eee;
 }
-.content #title {
-}
-.content #subText {
+
+#content #memoSubTitle {
   height: 55px;
 }
-.content .memoAdd {
+#content .memoAdd {
   border: none;
   width: 100%;
   margin: 20px auto 0;
@@ -96,12 +110,8 @@ main {
   color: #fff;
   background-color: var(--point-colorPic);
 }
-#display {
-  min-width: 900px;
-  display: flex;
-  overflow-x: scroll;
-  padding-bottom: 10px;
-}
+
+/* display */
 #display article {
   position: relative;
   text-align: center;
@@ -127,6 +137,7 @@ main {
   height: 30px;
   line-height: 1.4;
   font-weight: 600;
+  color: #888;
 }
 #display article span {
   overflow: hidden;
@@ -187,6 +198,7 @@ main {
   height: 0;
 }
 #container {
+  padding: 20px;
   transition: 0.3s;
   box-shadow: 0px 10px 10px 10px rgba(0, 0, 0, 0.1);
 }
@@ -194,7 +206,7 @@ main {
   position: absolute;
   top: 30px;
   right: -17%;
-  content: 'Todo\AList';
+  content: '\A';
   width: 40px;
   height: 100px;
   border-radius: 6px;
@@ -205,7 +217,7 @@ main {
 }
 .showTodoList {
   position: absolute;
-  left: -250px;
+  left: -280px;
   top: 0;
   height: 100vh;
   width: 300px;
@@ -218,4 +230,70 @@ main {
   height: 100vh;
   width: 300px;
   background-color: var(--point-colorPic);
+}
+
+/* profile card */
+.profileCard {
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
+  padding: 22px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+.profileCard .profileCover {
+  display: block;
+  width: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.profileCard .profileCover img {
+  width: 100%;
+  display: block;
+}
+.profileCard .profileContents {
+  flex: 1 0 0;
+  margin: 0 0 -8px;
+}
+.profileCard .profileContents h2 {
+  color: inherit;
+  text-align: left;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--point-colorPic);
+}
+.profileCard .profileContents h3 {
+  color: #666;
+  text-align: left;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 15px 0;
+}
+.profileCard .skill {
+  flex: 0 1 240px;
+}
+.profileCard .skill li {
+  display: inline-block;
+  background: var(--point-colorPic);
+  padding: 8px 12px;
+  margin: 8px 0 0;
+  color: white;
+  text-align: center;
+  font-weight: 400;
+  font-size: 12px;
+  border-radius: 100px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  -ms-border-radius: 100px;
+  -o-border-radius: 100px;
+}
+.profileCard .skill li i {
+  padding-right: 4px;
 }
